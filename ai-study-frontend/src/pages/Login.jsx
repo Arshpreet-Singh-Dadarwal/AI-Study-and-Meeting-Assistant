@@ -9,7 +9,7 @@ import { useState } from "react";
 import {useAuth} from "../context/authcontext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import {API} from "../api/api"
+import API from "../api/api"
 
 const Login = () => {
   const [email, setEmail] = useState("");
