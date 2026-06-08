@@ -9,6 +9,7 @@ import { useState } from "react";
 import {useAuth} from "../context/authcontext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import {API} from "../api/api"
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -20,7 +21,7 @@ const Login = () => {
     e.preventDefault();
     // Handle login logic
     try{
-    const  res= await axios.post("http://localhost:5000/api/auth/login",{email,password});
+    const  res= await API.post("http://localhost:5000/api/auth/login",{email,password});
    loginUser(res.data.token);
       localStorage.setItem("userId", res.data.user.id);
       localStorage.setItem("user", JSON.stringify(res.data.user));

@@ -8,6 +8,7 @@ import StarBackground from "@/components/StarfieldBackground";
 import { Atom, Mail, Lock, User, ArrowRight } from "lucide-react";
 import { useState } from "react";
 import axios from "axios";
+import {API} from "../api/api"
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -19,7 +20,7 @@ const Signup = () => {
   const handleSubmit = async(e) => {
     e.preventDefault();
     try{
-      const  res= await axios.post("http://localhost:5000/api/auth/register",{name,email,password,confirmPassword,agreeTerms});
+      const  res= await API.post("http://localhost:5000/api/auth/register",{name,email,password,confirmPassword,agreeTerms});
       console.log(res.data)
     }catch(err){
       console.log(err.message);
