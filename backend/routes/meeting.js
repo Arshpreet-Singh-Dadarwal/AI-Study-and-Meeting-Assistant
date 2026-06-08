@@ -5,7 +5,7 @@ const authMiddleware = require("../middleware/authMiddleware");
 const {
   getMyMeetings,
   deleteMeeting,
-} = require("../controllers/meetingController");
+} = require("../controllers/meetingcontroller");
 
 // ✅ Get all meetings of logged in user
 router.get("/my", authMiddleware, getMyMeetings);
