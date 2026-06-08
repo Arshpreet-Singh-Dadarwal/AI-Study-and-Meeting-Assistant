@@ -20,7 +20,7 @@ const Signup = () => {
   const handleSubmit = async(e) => {
     e.preventDefault();
     try{
-      const  res= await API.post("http://localhost:5000/api/auth/register",{name,email,password,confirmPassword,agreeTerms});
+      const  res= await API.post("/api/auth/register",{name,email,password,confirmPassword,agreeTerms});
       console.log(res.data)
     }catch(err){
       console.log(err.message);

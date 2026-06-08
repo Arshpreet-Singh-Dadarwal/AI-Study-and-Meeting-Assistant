@@ -11,7 +11,7 @@ const cors=require('cors');
 app.use(express.json());
 app.use(cors({
     origin:[" http://localhost:5173/",
-        process.env.Frontend_url,
+        process.env.FRONTEND_URL,
     ],
     credentials:true
 
