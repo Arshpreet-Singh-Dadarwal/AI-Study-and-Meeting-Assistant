@@ -44,14 +44,14 @@ const handleGenerate = async () => {
     formData.append("userId", user.id); 
 
     // 1️⃣ Upload
-    const uploadRes = await API.post("/files/upload", formData, {
+    const uploadRes = await API.post("api/files/upload", formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
 
     const uploadedFileId = uploadRes.data.fileId;
 
     // 2️⃣ AI summarize
-    await API.post("/ai/summarize", { fileId: uploadedFileId, type: "pdf" });
+    await API.post("api/ai/summarize", { fileId: uploadedFileId, type: "pdf" });
 
     navigate("/dashboard");
   } catch (err) {

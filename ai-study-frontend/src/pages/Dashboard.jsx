@@ -25,7 +25,7 @@ export default function Dashboard() {
 
   const fetchNotes = async () => {
     try {
-      const res = await API.get("/notes/my");
+      const res = await API.get("api/notes/my");
       setNotes(res.data.notes || []);
     } catch (err) {
       console.error(err);
@@ -36,7 +36,7 @@ export default function Dashboard() {
 
   const fetchMeetings = async () => {
     try {
-      const res = await API.get("/meetingNotes/my");
+      const res = await API.get("api/meetingNotes/my");
       setMeetings(res.data.notes || []);
     } catch (err) {
       console.error(err);
@@ -47,7 +47,7 @@ export default function Dashboard() {
 
   const deleteNote = async (id) => {
     try {
-      await API.delete(`/notes/${id}`);
+      await API.delete(`api/notes/${id}`);
       setNotes((prev) => prev.filter((n) => n._id !== id));
     } catch (err) {
       console.error(err);
@@ -56,7 +56,7 @@ export default function Dashboard() {
 
   const deleteMeeting = async (id) => {
     try {
-      await API.delete(`/meetingNotes/${id}`);
+      await API.delete(`api/meetingNotes/${id}`);
       setMeetings((prev) => prev.filter((m) => m._id !== id));
     } catch (err) {
       console.error(err);

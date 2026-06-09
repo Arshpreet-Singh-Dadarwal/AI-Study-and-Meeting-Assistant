@@ -9,23 +9,16 @@ const Meeting = require("../models/Meeting");
 const storage = new CloudinaryStorage({
 cloudinary,
 params: async (req, file) => {
-let folder = "files";
+  const isMedia =
+    file.mimetype.startsWith("audio/") ||
+    file.mimetype.startsWith("video/");
 
-
-if (
-  file.mimetype.startsWith("audio/") ||
-  file.mimetype.startsWith("video/")
-) {
-  folder = "meetings";
-}
-
-return {
-  folder,
-  resource_type: "auto",
-  public_id: `${Date.now()}-${file.originalname}`,
-};
-
-
+  return {
+    folder: isMedia ? "meetings" : "files",
+    resource_type: isMedia ? "video" : "raw",
+    public_id: `${Date.now()}-${file.originalname}`,
+    type: "upload"
+  };
 },
 });
 
@@ -75,7 +68,7 @@ message: "No file uploaded",
     fileType: req.file.mimetype,
     fileUrl: req.file.path,
   });
-
+console.log(JSON.stringify(req.file, null, 2));
   const isMeeting =
     req.file.mimetype.startsWith("audio/") ||
     req.file.mimetype.startsWith("video/");

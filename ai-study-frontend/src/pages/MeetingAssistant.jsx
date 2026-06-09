@@ -2,7 +2,7 @@
 import Layout from "@/components/Layout";
 import { MicOff, FileText } from "lucide-react";
 import { useState } from "react";
-
+import API from "../api/api"
 const MeetingAssistant = () => {
   const [recentMeetings, setRecentMeetings] = useState([]);
   const [uploading, setUploading] = useState(false);
@@ -19,7 +19,7 @@ const MeetingAssistant = () => {
       formData.append("file", file);
 
       // ✅ Backend API call
-      const res = await fetch("http://localhost:5000/api/meeting/upload", {
+      const res = await fetch(`${API}/api/meeting/upload`, {
         method: "POST",
         body: formData,
       });

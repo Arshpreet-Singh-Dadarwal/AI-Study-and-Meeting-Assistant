@@ -121,12 +121,20 @@ class FileInput(BaseModel):
 async def summarize_file(data: FileInput):
     try:
         file_url = data.file_url
+        response = requests.get(
+            file_url,
+            allow_redirects=True,
+            timeout=60
+        )
 
-        response = requests.get(file_url)
+       
+        print("STATUS:", response.status_code)
+        print("HEADERS:", response.headers)
 
-        if response.status_code != 200:
+        if response.status_code > 400:
+            print("BODY:", response.text[:500])
             return {
-                "error": "Unable to download file"
+                "error": f"Unable to download file. Status: {response.status_code}"
             }
 
         with tempfile.NamedTemporaryFile(
@@ -161,7 +169,19 @@ async def summarize_file(data: FileInput):
         return {
             "error": str(e)
         }
-  
+    # Path Resolution (Same as before)
+    raw = (data.file_path or "").strip().replace("\\", "/")
+    filename = os.path.basename(raw)
+    candidates = []
+    
+    try:
+        if Path(raw).is_absolute(): candidates.append(raw)
+    except: pass
+    
+    candidates.append(str(Path(BASE_DIR) / raw))
+    candidates.append(str(Path(UPLOADS_FILES_DIR) / filename))
+    candidates.append(str(Path(UPLOADS_MEETINGS_DIR) / filename))
+    candidates.append(str(Path(UPLOADS_DIR) / filename))
 
 
 

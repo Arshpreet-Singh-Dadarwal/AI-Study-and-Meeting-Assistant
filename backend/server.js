@@ -30,7 +30,7 @@ app.use('/api/ai',aiRoutes);
 app.use('/api/notes',noteRoutes);
 app.use('/api/meeting',meeting);
 app.use('/api/meetingNotes',meetingNotesRoutes);
-const PORT = process.env.PORT || 5000;
+const PORT =  5000;
 app.listen(PORT,()=>{
     console.log("Server is running on port 5000");
 })
